@@ -28,6 +28,16 @@ DUDDashboard skeleton looks like this
     - Contains Start-DUDDashboard, a wrapper for Start-UDDashboard that initialize DudDashboard
 
 - Appsettings.json - Contains some settings you would normally pass to Start-UDDashboard, authentication settings used by the login (if defined) and some parameters tied to the DUD-HotReload component. 
+- Start-Watch.ps1 (Requires appsettings.json Hotreload section configuration) - When developping, if you execute Start-Watch.ps1, it will start monitoring Files and either update the dashboard (Through Update-UDDashboard) or restart the IIS application pool. For this reason, this file need to be executed as an administrator. When the dashboard update itself, page will refresh automatically. When app pool is recycled, you will need to refresh manually the page yourself. Based on the changed element, Universal Dashboard requires to restart the IIS. Items and behaviors : 
+
+    - Endpoints - Restart
+    - Page, Scripts and Styles - Update
+    - Dashboard.ps1 - Restart
+    - Root.ps1 - update
+    - Data - update
+    - Navigation & Footer - Restart
+
+
 
 ### Src subfolder content
 
