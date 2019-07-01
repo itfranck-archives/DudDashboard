@@ -13,7 +13,7 @@ This is not to say that it won't work using Windows Service, Azure or .net core,
 
 Documentation below is only a tiny introduction and I plan to create a much more detailed documentation in the next few weeks.
 
-Meanwhile, if you have any questions, you can ask them on my thread on the Universal Dashboard forum - Link here 
+Meanwhile, if you have any questions, you can ask them on my thread on the Universal Dashboard forum - [here](https://forums.universaldashboard.io/t/dud-dashboard-wip-scaffolding-module/910)
 
 ## Objectives. 
 The objective of this module is to provide a scaffolding framework to develop quickly your dashboards. 
