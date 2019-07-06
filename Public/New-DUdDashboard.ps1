@@ -57,18 +57,25 @@ function  New-DUDDashboard {
         if ($null -eq $ExtraParameters) { $ExtraParameters = @{ }
         }
         
+        if ($Cache:Settings.Authentication -ne $null -and ($Cache:LoginPage -eq $null -or $Cache:LoginPage.Gettype().name -ne 'LoginPage')) {
+            throw 'Login page not found'
+        }
+
         return  New-UDDashboard @DashboardParams @Params @ExtraParameters -EndpointInitialization $EI 
     
     }
     catch {
-        $MyError = $_
-        New-UDDashboard -Title 'Error' -Content {
-            New-UDCard -Title '' -Text ($MyError | format-list -force | Out-String)
-            New-UDCard -Title 'DashboardParams' -Text ($DashboardParams | Out-String)
-            New-UDCard -Title 'Params' -Text ($Params | Out-String)
-            New-UDCard -Title 'ExtraParameters' -Text ($ExtraParameters | Out-String)
+        if ($Cache:Settings.UDConfig.Design -eq $true) {
+            $MyError = $_
+            New-UDDashboard -Title 'Error' -Content {
+                New-UDCard -Title '' -Text ($MyError | format-list -force | Out-String)
+                New-UDCard -Title 'DashboardParams' -Text ($DashboardParams | Out-String)
+                New-UDCard -Title 'Params' -Text ($Params | Out-String)
+                New-UDCard -Title 'ExtraParameters' -Text ($ExtraParameters | Out-String)
             
-        }    
+            }    
+        }
+      
     }
     
   

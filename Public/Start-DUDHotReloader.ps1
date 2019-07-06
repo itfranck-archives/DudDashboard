@@ -84,6 +84,7 @@ function Start-DUDHotReloader {
                 $Private:Paths.Add("$($Private:Root)\AppSettings.json", $RestartAction)
                 $Private:Paths.Add("$($Private:Root)\*\Endpoints\*.ps1", $RestartAction)
                 $Private:Paths.Add("$($Private:Root)\*\Footer.ps1", $RestartAction)
+                $Private:Paths.Add("$($Private:Root)\src\Login.ps1", $RestartAction)
                 $Private:Paths.Add("$($Private:Root)\src\Navigation.ps1", $RestartAction)
                 $Private:Paths.Add("$($Private:Root)\*.ps1", [DashboardAction]::Update)
                 $Private:Paths.Add("$($Private:Root)\src\*.css", [DashboardAction]::Update)

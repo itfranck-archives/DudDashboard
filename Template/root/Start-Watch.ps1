@@ -17,7 +17,7 @@ Set-DUDSettingsCache -Path $root
 $UDHotParams = @{
     Root          = $root
     UpdateToken   = $cache:Settings.UDConfig.UpdateToken
-    DashboardPath = (Resolve-Path -Path $cache:Settings.UDConfig.FilePath)
+    DashboardPath = "$root\src\root.ps1"
     Url           = $cache:Settings.HotReload.UpdateURL
     AppPool       = $cache:Settings.HotReload.AppPool
     UpdateDelay   = 750
