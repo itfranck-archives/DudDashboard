@@ -20,7 +20,7 @@ To be documented more thoroughly.
 
     }
 
-    New-UDCard -Title '$Cache:Settings — Populated from appsettings.json' -Content {
+    New-UDCard -Title '$Cache:dud.Settings — Populated from appsettings.json' -Content {
         New-UDCard -Title 'Authentication' -Text '[Hashtable] Values automatically passed to New-UDLoginpage'
         New-UDCard -Title 'HotReload' -Content {
             New-UDCard -Title ' ' -Text @'
@@ -37,7 +37,7 @@ To be documented more thoroughly.
         }
     }
 
-    New-UDCard -Title '$Cache:Paths — automatically populated' -Content {
+    New-UDCard -Title '$Cache:dud.Paths — automatically populated' -Content {
         New-UDCard -Title 'CurrentDashboardFullPath' -Text 'Full Path of the root.ps1 file'
         New-UDCard -Title 'CurrentDashboardFolderFullPath' -Text 'Full Path to the SRC folder'
         New-UDCard -Title 'Root' -Text 'Full Path to dashboard.ps1 folder'

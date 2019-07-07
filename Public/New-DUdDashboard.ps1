@@ -1,31 +1,38 @@
 
-function  New-DUDDashboard {
+function  New-DUDDashboard
+{
     [CmdletBinding()]
     Param([Hashtable]$EndpointInit, [Hashtable]$ExtraParameters)
 
-    try {
+    try
+    {
         $GetSetting = { Param($MySetting, $ParamName) if ($MySetting -ne $null) { $DashboardParams."$ParamName" = $MySetting } }
 
-        $Cache:DUDData = @{ }
+        if ($Cache.dud -eq $null)
+        { 
+            $Cache:dud.Data = @{ } 
+        }
         $DashboardParams = @{ }
 
-        $GetSetting.Invoke($Cache:Settings.UDConfig.DashboardTitle, 'Title')
+        $GetSetting.Invoke($Cache:dud.Settings.UDConfig.DashboardTitle, 'Title')
         $GetSetting.Invoke($Cache:LoginPage, 'LoginPage')
         $GetSetting.Invoke($Cache:Footer, 'Footer')
         $GetSetting.Invoke($Cache:Navigation, 'Navigation')
-        $GetSetting.Invoke($Cache:Settings.UDConfig.IdleTimeout, 'IdleTimeout')
+        $GetSetting.Invoke($Cache:dud.Settings.UDConfig.IdleTimeout, 'IdleTimeout')
     
-        $Functions = Get-ChildItem -Path "$($cache:Paths.CurrentDashboardFolderFullPath)\Functions" -Filter '*.ps1' -Recurse 
+        $Functions = Get-ChildItem -Path "$($Cache:dud.Paths.CurrentDashboardFolderFullPath)\Functions" -Filter '*.ps1' -Recurse 
         $Functions | % { . $_.FullName }
         $FunctionsNames = $Functions | % { [System.IO.Path]::GetFileNameWithoutExtension($_.FullName) }
 
-        $DataSourcePath = "$($cache:Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:Settings.UDConfig.DataSource)"
-        if (Test-Path -Path $DataSourcePath ) {
+        $DataSourcePath = "$($Cache:dud.Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:dud.Settings.UDConfig.DataSource)"
+        if (Test-Path -Path $DataSourcePath )
+        {
             Get-ChildItem -Path $DataSourcePath -Filter '*.ps1' | % { . $_.FullName }
         }
 
         $EIParams = @{ }
-        if ($PSBoundParameters.ContainsKey('EndpointInit')) {
+        if ($PSBoundParameters.ContainsKey('EndpointInit'))
+        {
             $EIParams = $PSBoundParameters.Item('EndpointInit')
      
             if ($null -eq $EIParams.Module) { $EIParams.remove('Module') }
@@ -33,11 +40,14 @@ function  New-DUDDashboard {
             if ($null -eq $EIParams.Variable) { $EIParams.remove('Variable') }
         }
     
-        if ($null -ne $FunctionsNames) {
-            if ($null -ne $EIParams.Function) {
+        if ($null -ne $FunctionsNames)
+        {
+            if ($null -ne $EIParams.Function)
+            {
                 $EIParams.function = $EIParams.Function + $FunctionsNames
             }
-            else {
+            else
+            {
                 $EIParams.Function = $FunctionsNames
             }
         
@@ -45,10 +55,11 @@ function  New-DUDDashboard {
 
         $EI = New-UDEndpointInitialization  -Function $FunctionsNames 
         $Params = Get-DUDFolders
-        $Cache:Params = $Params
+        $Cache:dud.Params = $Params
 
-        $DataSourcePath = "$($cache:Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:Settings.UDConfig.DataSource)"
-        if (Test-Path -Path $DataSourcePath ) {
+        $DataSourcePath = "$($Cache:dud.Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:dud.Settings.UDConfig.DataSource)"
+        if (Test-Path -Path $DataSourcePath )
+        {
             Get-ChildItem -Path $DataSourcePath -Filter '*.ps1' | % { . $_.FullName }
         }
         
@@ -57,15 +68,18 @@ function  New-DUDDashboard {
         if ($null -eq $ExtraParameters) { $ExtraParameters = @{ }
         }
         
-        if ($Cache:Settings.Authentication -ne $null -and ($Cache:LoginPage -eq $null -or $Cache:LoginPage.Gettype().name -ne 'LoginPage')) {
+        if ($Cache:dud.Settings.Authentication -ne $null -and ($Cache:LoginPage -eq $null -or $Cache:LoginPage.Gettype().name -ne 'LoginPage'))
+        {
             throw 'Login page not found'
         }
 
         return  New-UDDashboard @DashboardParams @Params @ExtraParameters -EndpointInitialization $EI 
     
     }
-    catch {
-        if ($Cache:Settings.UDConfig.Design -eq $true) {
+    catch
+    {
+        if ($Cache:dud.Settings.UDConfig.Design -eq $true)
+        {
             $MyError = $_
             New-UDDashboard -Title 'Error' -Content {
                 New-UDCard -Title '' -Text ($MyError | format-list -force | Out-String)

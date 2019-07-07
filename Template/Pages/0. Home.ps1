@@ -1,5 +1,5 @@
 ﻿New-UDPage -Name 'home'  -Content {
-    $Welcome = $Cache:DUDData.Home.Welcome
+    $Welcome = $Cache:dud.Data.Home.Welcome
     
     New-UDCard @Welcome
 }

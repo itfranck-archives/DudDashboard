@@ -9,17 +9,17 @@ if ([String]::IsNullOrWhiteSpace($Path) -eq $false) {
     Set-Location -Path $Path 
 }
 
-Import-Module DUDDashboard
-#import-module 'C:\Github\DudDashboard\DudDashboard.psd1' 
+#Import-Module DUDDashboard
+import-module 'C:\Github\DudDashboard\DudDashboard.psd1' 
 $root = $PSScriptRoot
 Set-DUDSettingsCache -Path $root
 
 $UDHotParams = @{
     Root          = $root
-    UpdateToken   = $cache:Settings.UDConfig.UpdateToken
+    UpdateToken   = $Cache:dud.Settings.UDConfig.UpdateToken
     DashboardPath = "$root\src\root.ps1"
-    Url           = $cache:Settings.HotReload.UpdateURL
-    AppPool       = $cache:Settings.HotReload.AppPool
+    Url           = $Cache:dud.Settings.HotReload.UpdateURL
+    AppPool       = $Cache:dud.Settings.HotReload.AppPool
     UpdateDelay   = 750
 }
 

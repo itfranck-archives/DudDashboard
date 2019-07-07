@@ -1,5 +1,5 @@
 New-UDSideNav  -Id 'sidenav' -Endpoint {
-    $Pages = $Cache:Params.Pages
+    $Pages = $Cache:dud.Params.Pages
 
     Foreach ($P in $Pages) {
         $Name = $P.Name

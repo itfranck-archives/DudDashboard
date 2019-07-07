@@ -1,4 +1,4 @@
-﻿$Cache:DUDData.Home = @{
+﻿$Cache:dud.Data.Home = @{
     Welcome = @{
         Title = 'Welcome !'
         Text  = @"

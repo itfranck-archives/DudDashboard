@@ -8,7 +8,7 @@ $UDLoginPageParams = @{ }
 #$UDLoginPageParams.AuthorizationPolicy = $AuthorizationPolicy
  
 #Auth params from Appsettings.json
-$AuthParams = @{ }; $Cache:Settings.Authentication.psobject.Properties | % { $AuthParams."$($_.Name)" = $_.Value }
+$AuthParams = @{ }; $Cache:dud.Settings.Authentication.psobject.Properties | % { $AuthParams."$($_.Name)" = $_.Value }
 $Auth = New-UDAuthenticationMethod @AuthParams 
 $UDLoginPageParams.AuthenticationMethod = $Auth
 

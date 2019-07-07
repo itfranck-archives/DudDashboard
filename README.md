@@ -54,7 +54,7 @@ All these files are command (some optionals) part of a normal UDDashboard.
 
 #### Folders
 - Data
-    -   Tied to Datasource appsettings.json . Files from the selected datasource subfolder are loaded into memory. Intended usage is to separate data from main datasource and a demo / dev source. You could therefore use the demo datasource for documenting or share the dashboard with peace of mind by having the demo datasource in place just by removing the production datasource, which might contains proprietary code. $Cache:DudData.MyPage can be referenced in your pages. (Better documentation to come)
+    -   Tied to Datasource appsettings.json . Files from the selected datasource subfolder are loaded into memory. Intended usage is to separate data from main datasource and a demo / dev source. You could therefore use the demo datasource for documenting or share the dashboard with peace of mind by having the demo datasource in place just by removing the production datasource, which might contains proprietary code. $Cache:dud.Data.MyPage can be referenced in your pages. (Better documentation to come)
 - Endpoints 
     - All files within this folder must return New-UDEndpoint and will be imported automatically.
 - Functions

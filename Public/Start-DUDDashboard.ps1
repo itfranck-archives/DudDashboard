@@ -5,42 +5,50 @@ function Start-DUDDashboard {
         [Switch]$Wait,
         $Parameters
     )
-    
-    $Cache:Paths = @{ }
-    $Cache:Paths.Root = (Get-location).Path
+    if ($cache:dud -eq $null) { $cache:dud = @{ }
+    } 
+
+    if ($test -eq $null) { $test = @{ } 
+    }
+    if ($test -eq $null) {
+        $test = @{ }
+    }
+
+    $Cache:dud.Paths = @{ }
+    $Cache:dud.Paths.Root = (Get-location).Path
 
     Set-DUDSettingsCache
 
-    $Cache:Paths = @{
-        Root                           = $Cache:Paths.Root
+    $Cache:dud.Paths = @{
+        Root                           = $Cache:dud.Paths.Root
         CurrentDashboardFolderFullPath = ''
         CurrentDashboardFullPath       = ''
         CurrentDashboardFolder         = '' 
         CurrentDashboard               = ''
     }
 
-    if ([String]::IsNullOrWhiteSpace($Cache:Paths.CurrentDashboardFolder)) {
-        $Cache:Paths.CurrentDashboardFolderFullPath = "$($Cache:Paths.Root)\src"
+    if ([String]::IsNullOrWhiteSpace($Cache:dud.Paths.CurrentDashboardFolder)) {
+        $Cache:dud.Paths.CurrentDashboardFolderFullPath = "$($Cache:dud.Paths.Root)\src"
     }
     else {
-        $Cache:Paths.CurrentDashboardFolderFullPath = "$($Cache:Paths.Root)\src\$($Cache:Paths.CurrentDashboardFolder)"
+        $Cache:dud.Paths.CurrentDashboardFolderFullPath = "$($Cache:dud.Paths.Root)\src\$($Cache:dud.Paths.CurrentDashboardFolder)"
     }
 
 
-    $Cache:Paths.CurrentDashboardFullPath = "$($Cache:Paths.Root)\src\Root.ps1"
+    $Cache:dud.Paths.CurrentDashboardFullPath = "$($Cache:dud.Paths.Root)\src\Root.ps1"
 
 
-    $LoginFilePath = "$($Cache:Paths.Root)\src\Login.ps1"
+    $LoginFilePath = "$($Cache:dud.Paths.Root)\src\Login.ps1"
     if (Test-Path -Path $LoginFilePath) {
         $Cache:LoginPage = & $LoginFilePath
     }
 
-    $FooterFilePath = "$($Cache:Paths.Root)\src\Footer.ps1"
+    $FooterFilePath = "$($Cache:dud.Paths.Root)\src\Footer.ps1"
     if (Test-Path -Path $FooterFilePath) {
         $Cache:Footer = & $FooterFilePath
     }
 
-    $NavigationFilePath = "$($Cache:Paths.Root)\src\Navigation.ps1"
+    $NavigationFilePath = "$($Cache:dud.Paths.Root)\src\Navigation.ps1"
     if (Test-Path -Path $NavigationFilePath) {
         $Cache:Navigation = & $NavigationFilePath
     }
@@ -48,17 +56,17 @@ function Start-DUDDashboard {
     $Endpoints = Get-DUDEndpoints
 
     $Params = Get-DUDFolders
-    $Cache:Params = $Params
+    $Cache:dud.Params = $Params
 
 
     $DashboardStartParams = @{ }
-    if ([String]::IsNullOrWhiteSpace($cache:Settings.UDConfig.SSLCertificatePath) -eq $false) {
-        $DashboardStartParams.Certificate = Get-ChildItem -Path $cache:Settings.UDConfig.SSLCertificatePath
+    if ([String]::IsNullOrWhiteSpace($Cache:dud.Settings.UDConfig.SSLCertificatePath) -eq $false) {
+        $DashboardStartParams.Certificate = Get-ChildItem -Path $Cache:dud.Settings.UDConfig.SSLCertificatePath
     }
     $GetSetting = { Param($MySetting, $ParamName) if ($MySetting -ne $null) { $DashboardStartParams."$ParamName" = $MySetting } }
-    $GetSetting.Invoke($cache:Settings.UDConfig.UpdateToken, 'UpdateToken')
-    $GetSetting.Invoke($Cache:Paths.CurrentDashboardFullPath, 'FilePath')
-    $GetSetting.Invoke($Cache:Settings.UDConfig.Design, 'Design')
+    $GetSetting.Invoke($Cache:dud.Settings.UDConfig.UpdateToken, 'UpdateToken')
+    $GetSetting.Invoke($Cache:dud.Paths.CurrentDashboardFullPath, 'FilePath')
+    $GetSetting.Invoke($Cache:dud.Settings.UDConfig.Design, 'Design')
     $DashboardStartParams.Endpoint = $Endpoints
 
     #New-DUDDashboard
