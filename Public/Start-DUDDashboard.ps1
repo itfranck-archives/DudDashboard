@@ -72,6 +72,8 @@ function Start-DUDDashboard {
     #New-DUDDashboard
     Write-UDLog -Level Debug -Message "Test message" -LoggerName 'hello'
     Write-UDLog -Level Debug -Message "Test message" 
-    Start-UDDashboard @PSBoundParameters @DashboardStartParams 
+    if ($null -eq $Parameters) { $Parameters = @{ }
+    }
+    Start-UDDashboard @Parameters @PSBoundParameters @DashboardStartParams 
     
 }
