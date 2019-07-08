@@ -1,4 +1,4 @@
-Param([Switch]$Wait, $Path)
+﻿Param([Switch]$Wait, $Path)
 $AdminMode = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if ([String]::IsNullOrWhiteSpace($Path) -eq $false) {
     if ($AdminMode -eq $false) {
@@ -34,3 +34,4 @@ if ($Wait) {
         Start-Sleep -Milliseconds 200
     }
 }
+

@@ -1,4 +1,4 @@
-function Get-DUDFolders() {
+﻿function Get-DUDFolders() {
     # Stylesheets
     
     $Output = @{
@@ -29,4 +29,5 @@ function Get-DUDFolders() {
     $StylesPath.Name | % { $Output.Stylesheets += "/Styles/$_" }
     return $Output
 }
+
 

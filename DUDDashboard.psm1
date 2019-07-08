@@ -1,4 +1,4 @@
-$functionFolders = @('Types','Classes','Public', 'Internal')
+﻿$functionFolders = @('Types','Classes','Public', 'Internal')
 if (Test-Path "$PSScriptRoot\build") {Remove-Item -Path "$PSScriptRoot\build" -Force -Recurse}
 New-Item "$PSScriptRoot\build" -ItemType Directory
 ForEach ($folder in $functionFolders)
@@ -30,3 +30,4 @@ ForEach ($folder in $functionFolders)
 }
 $publicFunctions = (Get-ChildItem -Path "$PSScriptRoot\Public" -Filter '*.ps1').BaseName
 Export-ModuleMember -Function $publicFunctions
+

@@ -1,4 +1,4 @@
-$moduleRoot = Resolve-Path "$PSScriptRoot\.."
+﻿$moduleRoot = Resolve-Path "$PSScriptRoot\.."
 $moduleName = Split-Path $moduleRoot -Leaf
 
 Describe "General project validation: $moduleName" {

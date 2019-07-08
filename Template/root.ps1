@@ -1,4 +1,4 @@
-import-module DUDDashboard
+﻿import-module DUDDashboard
 
 
 $Params = @{ }
@@ -37,5 +37,6 @@ $ExtraParameters = @{
 if ($EndpointInit -ne $null) { $Params.Add('EndpointInit', $EndpointInit) }
 
 New-DUDDashboard -ErrorAction Stop @Params -ExtraParameters $ExtraParameters
+
 
 

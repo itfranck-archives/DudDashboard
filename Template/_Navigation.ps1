@@ -1,4 +1,4 @@
-New-UDSideNav  -Id 'sidenav' -Endpoint {
+﻿New-UDSideNav  -Id 'sidenav' -Endpoint {
     $Pages = $Cache:dud.Params.Pages
 
     Foreach ($P in $Pages) {
@@ -17,4 +17,5 @@ New-UDSideNav  -Id 'sidenav' -Endpoint {
     }
    
 }
+
 

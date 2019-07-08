@@ -1,4 +1,4 @@
-function Start-DUDHotReloader {
+﻿function Start-DUDHotReloader {
     param(
         [Parameter(Mandatory = $true)]
         $Root,
@@ -113,3 +113,4 @@ function Start-DUDHotReloader {
 
     }
 }
+

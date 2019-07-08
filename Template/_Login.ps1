@@ -1,4 +1,4 @@
-$UDLoginPageParams = @{ }
+﻿$UDLoginPageParams = @{ }
 
 # $AuthorizationPolicy = New-UDAuthorizationPolicy -Name "Policy1" -Endpoint {
 #     param($User)
@@ -14,5 +14,6 @@ $UDLoginPageParams.AuthenticationMethod = $Auth
 
 
 New-UDLoginPage @UDLoginPageParams
+
 
 

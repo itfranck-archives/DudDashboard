@@ -1,1 +1,1 @@
-New-UDFooter -Endpoint {} -BackgroundColor 'white'
+﻿New-UDFooter -Endpoint {} -BackgroundColor 'white'

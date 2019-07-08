@@ -1,4 +1,4 @@
-New-UDEndpoint -Url '/welcome' -Method GET -Endpoint {
+﻿New-UDEndpoint -Url '/welcome' -Method GET -Endpoint {
     try {
         
     }
@@ -7,5 +7,6 @@ New-UDEndpoint -Url '/welcome' -Method GET -Endpoint {
     }
     return 'Welcome'
 }
+
 
 

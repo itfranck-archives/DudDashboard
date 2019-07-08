@@ -1,4 +1,4 @@
-task . Clean, Build, Tests, ExportHelp, Stats
+﻿task . Clean, Build, Tests, ExportHelp, Stats
 task Tests ImportCompipledModule, Pester
 task CreateManifest CopyPSD, UpdatPublicFunctionsToExport
 task Build Compile, CreateManifest
@@ -131,3 +131,4 @@ task WriteStats {
 task ExportHelp -if (Test-Path -Path "$script:ModuleRoot\Help") {
     New-ExternalHelp -Path "$script:ModuleRoot\Help" -OutputPath $script:HelpPath
 }
+

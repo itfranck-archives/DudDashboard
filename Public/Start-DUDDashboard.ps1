@@ -1,4 +1,4 @@
-function Start-DUDDashboard {
+﻿function Start-DUDDashboard {
     [CmdletBinding()]
     param (
         [INT]$Port,
@@ -77,3 +77,4 @@ function Start-DUDDashboard {
     Start-UDDashboard @Parameters @PSBoundParameters @DashboardStartParams 
     
 }
+

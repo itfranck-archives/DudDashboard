@@ -1,4 +1,4 @@
-Function Set-DUDSettingsCache($Path) {
+﻿Function Set-DUDSettingsCache($Path) {
     if ($cache:dud -eq $null) { $cache:dud = @{ }
     } 
     if ($Path -ne $null) {
@@ -10,5 +10,6 @@ Function Set-DUDSettingsCache($Path) {
     }
     
 }
+
 
 

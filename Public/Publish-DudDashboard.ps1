@@ -1,4 +1,4 @@
-function Publish-DudDashboard {
+﻿function Publish-DudDashboard {
     [CmdletBinding()]
     param (
         [Switch]$Force,
@@ -57,4 +57,5 @@ function Publish-DudDashboard {
     end {
     }
 }
+
 
