@@ -12,7 +12,7 @@
     RootModule        = 'DUDDashboard.psm1'
 
     # Version number of this module.
-    ModuleVersion     = '0.1.7'
+    ModuleVersion     = '0.2.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -29,7 +29,7 @@
     Copyright         = '(c) 2019 Francis Mercier. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'Create scaffolded Universal Dashboards.'
+    Description       = 'Scaffolding framework for Universal Dashboard.'
 
     # Minimum version of the Windows PowerShell engine required by this module
     # PowerShellVersion = ''

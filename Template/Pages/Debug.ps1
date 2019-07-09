@@ -81,15 +81,18 @@
 
         New-UDCollapsible -Items {
             New-UDCollapsibleItem -Title '* Readme' -Content {
-                New-UDCard -Title 'Toggle Design mode' -Text 'Toggle the Design setting in appsettings.json - You must restart the app pool and refresh the page for this to take effect.'
-                New-UDCard -Title 'Start Watcher' -Text @'
-                 Start an instance of the _Start-Batch.bat file in your root folder. 
-                 The watcher will monitor file changes and refresh the dashboard or restart the apppool depending on the file changed. 
-                 Appsettings / Login / Navigation / Footers / Endpoints will restart the apppool.
-                 Pages and Data will update the dashboard instead. 
+                $RestartAppPool = $Cache:dud.data.Debug.RestartAppPool
+                $ToggleDesignMode = $Cache:dud.data.Debug.ToggleDesignMode
+                $StartWatcher = $Cache:dud.data.Debug.StartWatcher
+                $UpdateDashboard = $Cache:dud.data.Debug.UpdateDashboard
+                $Note = $Cache:dud.data.Debug.Note
+                $RestartAppPool.title = $RestartAppPool.title -f $Cache:dud.Settings.HotReload.Apppool
 
-                 This button currently act as a _Start-batch.bat launcher. The process launched through that button will remain in memory until killed manually. 
-'@              
+                New-UDCard @Note
+                New-UDCard @RestartAppPool
+                New-UDCard @ToggleDesignMode
+                New-UDCard @StartWatcher
+                New-UDCard @UpdateDashboard
             }
             
         }
@@ -100,4 +103,3 @@
     
 
 }
-
