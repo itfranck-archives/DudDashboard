@@ -1,15 +1,12 @@
 ﻿
-function  New-DUDDashboard
-{
+function  New-DUDDashboard {
     [CmdletBinding()]
     Param([Hashtable]$EndpointInit, [Hashtable]$ExtraParameters)
 
-    try
-    {
+    try {
         $GetSetting = { Param($MySetting, $ParamName) if ($MySetting -ne $null) { $DashboardParams."$ParamName" = $MySetting } }
 
-        if ($Cache.dud -eq $null)
-        { 
+        if ($Cache.dud -eq $null) { 
             $Cache:dud.Data = @{ } 
         }
         $DashboardParams = @{ }
@@ -25,14 +22,12 @@ function  New-DUDDashboard
         $FunctionsNames = $Functions | % { [System.IO.Path]::GetFileNameWithoutExtension($_.FullName) }
 
         $DataSourcePath = "$($Cache:dud.Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:dud.Settings.UDConfig.DataSource)"
-        if (Test-Path -Path $DataSourcePath )
-        {
+        if (Test-Path -Path $DataSourcePath ) {
             Get-ChildItem -Path $DataSourcePath -Filter '*.ps1' | % { . $_.FullName }
         }
 
         $EIParams = @{ }
-        if ($PSBoundParameters.ContainsKey('EndpointInit'))
-        {
+        if ($PSBoundParameters.ContainsKey('EndpointInit')) {
             $EIParams = $PSBoundParameters.Item('EndpointInit')
      
             if ($null -eq $EIParams.Module) { $EIParams.remove('Module') }
@@ -40,14 +35,11 @@ function  New-DUDDashboard
             if ($null -eq $EIParams.Variable) { $EIParams.remove('Variable') }
         }
     
-        if ($null -ne $FunctionsNames)
-        {
-            if ($null -ne $EIParams.Function)
-            {
+        if ($null -ne $FunctionsNames) {
+            if ($null -ne $EIParams.Function) {
                 $EIParams.function = $EIParams.Function + $FunctionsNames
             }
-            else
-            {
+            else {
                 $EIParams.Function = $FunctionsNames
             }
         
@@ -58,8 +50,7 @@ function  New-DUDDashboard
         $Cache:dud.Params = $Params
 
         $DataSourcePath = "$($Cache:dud.Paths.CurrentDashboardFolderFullPath)\Data\$($Cache:dud.Settings.UDConfig.DataSource)"
-        if (Test-Path -Path $DataSourcePath )
-        {
+        if (Test-Path -Path $DataSourcePath ) {
             Get-ChildItem -Path $DataSourcePath -Filter '*.ps1' | % { . $_.FullName }
         }
         
@@ -68,18 +59,17 @@ function  New-DUDDashboard
         if ($null -eq $ExtraParameters) { $ExtraParameters = @{ }
         }
         
-        if ($Cache:dud.Settings.Authentication -ne $null -and ($Cache:LoginPage -eq $null -or $Cache:LoginPage.Gettype().name -ne 'LoginPage'))
-        {
+        if ($Cache:dud.Settings.Authentication -ne $null -and ($Cache:LoginPage -eq $null -or $Cache:LoginPage.Gettype().name -ne 'LoginPage')) {
             throw 'Login page not found'
         }
-
-        return  New-UDDashboard @DashboardParams @Params @ExtraParameters -EndpointInitialization $EI 
+                
+        $Dash = New-UDDashboard @DashboardParams @Params @ExtraParameters -EndpointInitialization $EI
+        $Dash.Design = $Cache:dud.Settings.UDConfig.Design
+        return  $Dash
     
     }
-    catch
-    {
-        if ($Cache:dud.Settings.UDConfig.Design -eq $true)
-        {
+    catch {
+        if ($Cache:dud.Settings.UDConfig.Design -eq $true) {
             $MyError = $_
             New-UDDashboard -Title 'Error' -Content {
                 New-UDCard -Title '' -Text ($MyError | format-list -force | Out-String)
