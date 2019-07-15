@@ -74,6 +74,17 @@
     Write-UDLog -Level Debug -Message "Test message" 
     if ($null -eq $Parameters) { $Parameters = @{ }
     }
+
+    if ($cache:dud.Settings.PublishedFolders -ne $null) {
+        $PublishedFolders = [system.collections.generic.list[psobject]]::new()
+        Foreach ($i in ($cache:dud.Settings.PublishedFolders | Get-Member -MemberType NoteProperty).Name) {
+            $PublishedFolders.Add((Publish-UDFolder -Path $cache:dud.Settings.PublishedFolders."$i" -RequestPath $i))
+        }
+        if ($PublishedFolders.Count -gt 0) {
+            $DashboardStartParams.Add('PublishedFolder', $PublishedFolders)
+        }
+    }
+
     Start-UDDashboard @Parameters @PSBoundParameters @DashboardStartParams 
     
 }
