@@ -45,7 +45,7 @@ function  New-DUDDashboard {
         
         }
 
-        $EI = New-UDEndpointInitialization  -Function $FunctionsNames 
+        $EI = New-UDEndpointInitialization  @EIParams
         $Params = Get-DUDFolders
         $Cache:dud.Params = $Params
 
