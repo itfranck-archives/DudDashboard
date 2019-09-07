@@ -5,37 +5,11 @@
         [Switch]$Wait,
         $Parameters
     )
-    if ($cache:dud -eq $null) { $cache:dud = @{ }
-    } 
-
-    if ($test -eq $null) { $test = @{ } 
-    }
-    if ($test -eq $null) {
-        $test = @{ }
-    }
-
-    $Cache:dud.Paths = @{ }
-    $Cache:dud.Paths.Root = (Get-location).Path
-
+    
+    
     Set-DUDSettingsCache
 
-    $Cache:dud.Paths = @{
-        Root                           = $Cache:dud.Paths.Root
-        CurrentDashboardFolderFullPath = ''
-        CurrentDashboardFullPath       = ''
-        CurrentDashboardFolder         = '' 
-        CurrentDashboard               = ''
-    }
-
-    if ([String]::IsNullOrWhiteSpace($Cache:dud.Paths.CurrentDashboardFolder)) {
-        $Cache:dud.Paths.CurrentDashboardFolderFullPath = "$($Cache:dud.Paths.Root)\src"
-    }
-    else {
-        $Cache:dud.Paths.CurrentDashboardFolderFullPath = "$($Cache:dud.Paths.Root)\src\$($Cache:dud.Paths.CurrentDashboardFolder)"
-    }
-
-
-    $Cache:dud.Paths.CurrentDashboardFullPath = "$($Cache:dud.Paths.Root)\src\Root.ps1"
+    
 
 
     $LoginFilePath = "$($Cache:dud.Paths.Root)\src\Login.ps1"
@@ -69,10 +43,8 @@
     $GetSetting.Invoke($Cache:dud.Settings.UDConfig.Design, 'Design')
     $DashboardStartParams.Endpoint = $Endpoints
 
-    #New-DUDDashboard
-    Write-UDLog -Level Debug -Message "Test message" -LoggerName 'hello'
-    Write-UDLog -Level Debug -Message "Test message" 
-    if ($null -eq $Parameters) { $Parameters = @{ }
+    if ($null -eq $Parameters) { 
+        $Parameters = @{ }
     }
 
     if ($cache:dud.Settings.PublishedFolders -ne $null) {
