@@ -6,7 +6,16 @@
         
     } 
     $SettingsPath = if ($path -ne $null) { $Path }else { $Cache:dud.Paths.Root }
-    $Cache:dud.Settings = Get-Content "$SettingsPath\appsettings.json" | ConvertFrom-Json
+    try {
+        $Cache:dud.Settings = Get-Content "$SettingsPath\appsettings.json" -ErrorAction stop | ConvertFrom-Json -ErrorAction Stop
+    }
+    catch {
+        $CurrentError = $_
+        $Cache:dud = $null 
+        throw $CurrentError
+    }
+
+    
    
     $Cache:dud.Paths = @{
         Root                           = $Cache:dud.Paths.Root
