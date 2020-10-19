@@ -1,3 +1,8 @@
+## Warning
+
+Due to the important changes on how work Universal dashboard, this module was deprecated and have been archived.
+
+
 # DudDashboard
 
 DuDDashboard is a scaffolding module for Universal Dashboards. 
